@@ -8,7 +8,7 @@ npm i
 npm run dev
 ```
 
-## Setup Database Connection
+## Setup Database Connection (MongoDB Atlas)
 ```
 u: kirillsakharov@yahoo.co.uk
 p: GroupProject123
