@@ -1,13 +1,24 @@
 <template>
-  <mainComp />
+
+  <div class="section">
+    <div class="container">
+     
+      <mainComp />
+      <simple-upload />
+
+    </div>
+  </div>
+
 </template>
 
 <script>
-import mainComp from './components/mainComp.vue'
+import mainComp from './components/mainComp.vue';
+import SimpleUpload from './components/SimpleUpload.vue';
 export default {
   name: 'App',
   components: {
-    mainComp
+    mainComp,
+    SimpleUpload
   }
 }
 </script>
