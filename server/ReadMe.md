@@ -7,3 +7,9 @@ npm i
 ```
 npm run dev
 ```
+
+## Setup Database Connection
+```
+u: kirillsakharov@yahoo.co.uk
+p: GroupProject123
+```
