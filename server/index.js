@@ -39,13 +39,15 @@ const app = express();
 
 const ERROR_FILE_TYPE = "Only glb files are allowed.";
 const MAX_SIZE = 1024 * 1024 * 10; // 100 MB
+
+// Uploaded file validation using multer, incl. destination, file size, and file type
 const upload = multer({
     dest: './uploads/',
     limits: {
         fileSize: MAX_SIZE
     },
     fileFilter: (req, file, cb) => {
-        if(!file.originalname.endsWith('.glb')) {
+        if(!file.originalname.endsWith('.glb')) {    // only .glb files allowed for now
             const error = new Error("Wrong file type");
             error.code = "ERROR_FILE_TYPE";
             return cb(error, false);
