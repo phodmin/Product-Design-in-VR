@@ -47,7 +47,7 @@ const upload = multer({
         fileSize: MAX_SIZE
     },
     fileFilter: (req, file, cb) => {
-        if(!file.originalname.endsWith('.glb')) {    // only .glb files allowed for now
+        if(!file.originalname.endsWith('.glb')) {
             const error = new Error("Wrong file type");
             error.code = "ERROR_FILE_TYPE";
             return cb(error, false);
