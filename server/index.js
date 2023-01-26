@@ -32,15 +32,43 @@
 
 //--------------------------------------------------------------------------------
 // CORRECT CODE STARTS HERE
-const multer = require('multer');
 const express = require('express');
+const multer = require('multer');
+
 const app = express();
 
+const ERROR_FILE_TYPE = "Only glb files are allowed.";
+const MAX_SIZE = 1024 * 1024 * 10; // 100 MB
 const upload = multer({
-    dest: './uploads/'
+    dest: './uploads/',
+    limits: {
+        fileSize: MAX_SIZE
+    },
+    fileFilter: (req, file, cb) => {
+        if(!file.originalname.endsWith('.glb')) {
+            const error = new Error("Wrong file type");
+            error.code = "ERROR_FILE_TYPE";
+            return cb(error, false);
+        }
+        cb(null, true);
+    }
 });
 
 app.post('/upload', upload.single('file'), (req, res) => {
-    res.json({file: req.file });
-})
+    res.json({ file: req.file });
+});
+
+// Middleware for error
+app.use(function(err, req, res, next) {
+    if (err.code === "ERROR_FILE_TYPE") {
+        res.status(422).json({ error: "Only .glb files are allowed!" });
+        return;
+    }
+    if (err.code === "LIMIT_FILE_SIZE") {
+        res.status(422).json({ error: "Too large file." });
+        return;
+    }
+
+});
+
 app.listen(3344, () => console.log("Running on 3344..."));

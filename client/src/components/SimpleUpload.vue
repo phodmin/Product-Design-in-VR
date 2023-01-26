@@ -70,7 +70,7 @@ export default {
             this.error = false;
         } catch (err) {
             console.log(err);
-            this.message = "Something went wrong";
+            this.message = err.response.data.error;
             this.error = true;
         }
     }
