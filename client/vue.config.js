@@ -1,7 +1,7 @@
 // PROXY TO CONNECT FRONT END SERVER AND BACK END
 module.exports = {
   devServer: {
-    proxy: "http://localhost:3344"
+    proxy: "http://localhost:5000/"
   }
 };
 

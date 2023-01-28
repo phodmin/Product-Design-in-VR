@@ -1,11 +1,12 @@
 {
   "name": "fullstack",
   "version": "1.0.0",
-  "description": "full stakc vue and express app",
+  "description": "full stack vue and express app",
   "main": "index.js",
   "scripts": {
     "test": "node server/index.js",
     "dev": "nodemon server/index.js"
+    
   },
   "author": "",
   "license": "ISC",
