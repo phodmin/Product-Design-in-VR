@@ -1,48 +1,33 @@
-/**
- * INDEX.JS: Main Entry Point for Backend
-*/
+/*****************************************
+* INDEX.JS: Main Entry Point for Backend *
+******************************************/
 
 const express = require('express');
+const cors = require('cors');
 const multer = require('multer');
+const fileUpload = require('./routes/api/upload');
 
 const app = express();
 
-const ERROR_FILE_TYPE = "Only glb files are allowed.";
-const MAX_SIZE = 1024 * 1024 * 10; // 100MB
+/**************
+* MIDDLEWARE *
+***************/
+//Enable Cross Origin Resource Sharing (CORS) Requests
+app.use(cors());
 
-// Middleware - Error Codes
-app.use(function(err, req, res, next) {
-    if (err.code === "ERROR_FILE_TYPE") {
-        res.status(422).json({ error: "Only .glb files are allowed!" });
-        return;
-    }
-    if (err.code === "LIMIT_FILE_SIZE") {
-        res.status(422).json({ error: "Too large file." });
-        return;
-    }
+/*********
+* ROUTES *
+**********/
+//Backend Index
+app.get('/', (req, res) => {
+    res.send('Welcome to the RealView API');
 });
 
-// Uploaded file validation using multer, incl. destination, file size, and file type
-const upload = multer({
-    dest: './uploads/',
-    limits: {
-        fileSize: MAX_SIZE
-    },
-    fileFilter: (req, file, cb) => {
-        if(!file.originalname.endsWith('.glb')) {
-            const error = new Error("Wrong file type");
-            error.code = "ERROR_FILE_TYPE";
-            return cb(error, false);
-        }
-        cb(null, true);
-    }
-});
+//Single Upload
+app.use('/api/upload', fileUpload);
 
-//UPLOAD POST ROUTE
-app.post('/upload', upload.single('file'), (req, res) => {
-    res.json({ file: req.file });
-});
-
-//PORT CONFIG
+/**************
+* PORT CONFIG *
+***************/
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server started on port ${port}`));
