@@ -40,7 +40,7 @@ export class mainScene {
     SceneLoader.ImportMesh(
       "",
       "./models/",
-      "42e68c6fea9f0700366a1d9a27b79b2e.glb",
+      "item.glb",
       this.scene,
       function (meshes) {
         console.log("meshes", meshes);
@@ -50,7 +50,7 @@ export class mainScene {
     const result = SceneLoader.ImportMesh(
       "",
       "./models/",
-      "42e68c6fea9f0700366a1d9a27b79b2e.glb"
+      "item.glb"
     );
     const meshes = result.meshes;
 
