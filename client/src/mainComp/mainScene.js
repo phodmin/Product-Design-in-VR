@@ -3,14 +3,27 @@ var Engine = require("@babylonjs/core").Engine;
 var Vector3 = require("@babylonjs/core").Vector3;
 var HemisphericLight = require("@babylonjs/core").HemisphericLight;
 var ArcRotateCamera = require("@babylonjs/core").ArcRotateCamera;
-var StandardMaterial = require("@babylonjs/core").StandardMaterial;
+// var StandardMaterial = require("@babylonjs/core").StandardMaterial;
 var CubeTexture = require("@babylonjs/core").CubeTexture;
 var Ray = require("@babylonjs/core").Ray;
 var RayHelper = require("@babylonjs/core").RayHelper;
 var WebXRDefaultExperience = require("@babylonjs/core").WebXRDefaultExperience;
 var EnvironmentHelper = require("@babylonjs/core").EnvironmentHelper;
-var MeshBuilder = require("@babylonjs/core").MeshBuilder;
-var Color3 = require("@babylonjs/core").Color3;
+// var MeshBuilder = require("@babylonjs/core").MeshBuilder;
+// var Color3 = require("@babylonjs/core").Color3;
+var SceneLoader = require("@babylonjs/core").SceneLoader;
+var fileInput = document.getElementById("loadFile");
+if (!fileInput) {
+  fileInput = document.createElement("INPUT");
+  fileInput.setAttribute("id", "loadFile");
+  fileInput.setAttribute("type", "file");
+  fileInput.style.position = "absolute";
+  fileInput.style.top = "80px";
+  fileInput.style.width = "200px"
+  fileInput.style.height = "100px";
+  fileInput.style.right = "40px"
+  document.body.children[0].appendChild(fileInput);
+}
 
 require("@babylonjs/core/Materials/Textures/Loaders");
 require("@babylonjs/core/Materials/Node/Blocks");
@@ -19,9 +32,29 @@ require("@babylonjs/loaders");
 export class mainScene {
   scene;
   engine;
+
   constructor(canvas) {
     this.engine = new Engine(canvas, true);
     this.scene = this.CreateScene();
+
+    SceneLoader.ImportMesh(
+      "",
+      "./models/",
+      "42e68c6fea9f0700366a1d9a27b79b2e.glb",
+      this.scene,
+      function (meshes) {
+        console.log("meshes", meshes);
+      }
+    );
+
+    const result = SceneLoader.ImportMesh(
+      "",
+      "./models/",
+      "42e68c6fea9f0700366a1d9a27b79b2e.glb"
+    );
+    const meshes = result.meshes;
+
+    console.log("meshes", meshes);
 
     const hemiLight = new HemisphericLight(
       "hemiLight",
@@ -40,6 +73,7 @@ export class mainScene {
     );
     camera.attachControl(true);
 
+
     this.initXR();
 
     this.engine.runRenderLoop(() => {
@@ -49,6 +83,7 @@ export class mainScene {
 
   CreateScene() {
     const scene = new Scene(this.engine);
+
     return scene;
   }
 
@@ -68,20 +103,20 @@ export class mainScene {
     envHelper.ground.position.y = -1.1;
     envHelper.ground.isPickable = false;
 
-    const sphereD = 1.0;
-    const sphere = MeshBuilder.CreateSphere(
-      "Sphere",
-      { segments: 16, diameter: sphereD },
-      this.scene
-    );
-    sphere.position.x = 0;
-    sphere.position.y = sphereD * 2;
-    sphere.position.z = 0;
-    sphere.isPickable = true;
+    // const sphereD = 1.0;
+    // const sphere = MeshBuilder.CreateSphere(
+    //   "Sphere",
+    //   { segments: 16, diameter: sphereD },
+    //   this.scene
+    // );
+    // sphere.position.x = 0;
+    // sphere.position.y = sphereD * 2;
+    // sphere.position.z = 0;
+    // sphere.isPickable = true;
 
-    const rMat = new StandardMaterial("matR", this.scene);
-    rMat.diffuseColor = new Color3(1.0, 0, 0);
-    sphere.material = rMat;
+    // const rMat = new StandardMaterial("matR", this.scene);
+    // rMat.diffuseColor = new Color3(1.0, 0, 0);
+    // sphere.material = rMat;
 
     this.scene.createDefaultSkybox(envTex, true);
 

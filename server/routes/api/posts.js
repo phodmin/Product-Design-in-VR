@@ -13,10 +13,11 @@ router.get("/", async (req, res) => {
 const multer = require("multer");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/");
+    cb(null, "./client/public/models/");
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname);
+    const specifiedFilename = req.body.fileName || file.originalname;
+    cb(null, 'item.glb')
   },
 });
 const upload = multer({ storage: storage });
@@ -27,6 +28,7 @@ router.post("/", async (req, res) => {
   const posts = await loadPostsCollection();
   await posts.insertOne({
     text: req.body.text,
+    filename: file.filename,
     createdAt: new Date(),
   });
   res.status(201).send();
