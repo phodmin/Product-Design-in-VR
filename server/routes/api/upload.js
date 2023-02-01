@@ -4,7 +4,7 @@
 
 const express = require("express");
 const mongodb = require("mongodb");
-const multer = require('multer');
+const multer = require("multer");
 const ERROR_FILE_TYPE = "Only glb files are allowed.";
 const MAX_SIZE = 1024 * 1024 * 10; // MAX SIZE OF 100MB
 
