@@ -8,9 +8,10 @@
                 {{message}}
             </div>
         </div>
-
+  
         <div class="field">
             <div class="file is-boxed is-primary">
+                
                 <label class="file-label">
 
                     <input
@@ -30,12 +31,21 @@
                 </label>
             </div>
         </div>
+        <div>Enter object name: </div>  
+        <input type="text" v-model="fileName"/>
         <div class="field">
-            <button class="button is-info">
+            <button class="button is-info" @click="addFileToList">
                 Send
             </button>
         </div>
+         <ul>
+            <li v-for="file in uploadedFiles" :key="file">
+                {{ file }} 
+                <button>Add To Scene</button>
+                </li>
+        </ul>
     </form>
+     
 </template>
 
 <script>
@@ -47,7 +57,9 @@ export default {
     return {
         file: "",
         message: "",
-        error: false
+        error: false,
+        fileName: '',
+        uploadedFiles: [],
     }
    },
 
@@ -56,6 +68,10 @@ export default {
         this.file = this.$refs.file.files[0];
         this.error = false;
         this.message = "";
+    },
+    addFileToList() {
+        this.uploadedFiles.push(this.fileName);
+        this.fileName = '';   
     },
 
     // PUSHING THE UPLOADED FILE TO BACKEND
