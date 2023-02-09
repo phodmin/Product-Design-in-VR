@@ -94,14 +94,16 @@ export class mainScene {
     );
     const envHelper = new EnvironmentHelper(
       {
-        groundOpacity: 3,
+        groundOpacity: 0.75,
       },
       this.scene
     );
 
     envHelper.skybox?.dispose();
+    envHelper.ground.scaling = new Vector3(5, 5, 5);
     envHelper.ground.position.y = -1.1;
     envHelper.ground.isPickable = false;
+
 
     // const sphereD = 1.0;
     // const sphere = MeshBuilder.CreateSphere(
@@ -120,7 +122,7 @@ export class mainScene {
 
     this.scene.createDefaultSkybox(envTex, true);
 
-    this.scene.environmentIntensity = 0.5;
+    //this.scene.environmentIntensity = 0.5;
 
     const xr = await WebXRDefaultExperience.CreateAsync(this.scene, {
       floorMeshes: [envHelper.ground],
