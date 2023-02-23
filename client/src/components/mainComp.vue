@@ -1,16 +1,14 @@
 <template>
-  <div>
-    <h3>Software Engineering Group Project</h3>
+  <div class="maincomp">
     <canvas></canvas>
-    
-
   </div>
 </template>
 
 <script>
 import { mainScene } from '@/mainComp/mainScene';
+
 export default {
-  name: 'mainComp',
+  name: 'MainComp',
   mounted() {
     const canvas = document.querySelector("canvas");
     new mainScene(canvas);
@@ -18,11 +16,19 @@ export default {
 }
 </script>
 
+<style>
+.maincomp {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
 canvas {
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 </style>
