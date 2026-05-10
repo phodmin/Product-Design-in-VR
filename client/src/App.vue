@@ -17,14 +17,14 @@
       </div>
     </nav>
     <div class="main-content">
-      <MainComp />
+      <mainComp />
       
     </div>
   </div>
 </template>
 
 <script>
-import MainComp from './components/MainComp.vue';
+import mainComp from './components/mainComp.vue';
 import SimpleUpload from './components/SimpleUpload.vue';
 import SimpleLogin from './components/SimpleLogin.vue';
 import { mainScene } from '@/mainComp/mainScene';
@@ -32,7 +32,7 @@ import { mainScene } from '@/mainComp/mainScene';
 export default {
   name: 'App',
   components: {
-    MainComp,
+    mainComp,
     SimpleUpload,
     SimpleLogin
   },
@@ -46,7 +46,7 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
-* {
+*  {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -95,7 +95,8 @@ nav a:hover {
   align-items: center;
 }
 
-.main-content {
+
+/* .main-content {
   height: calc(100% - 80px);
   width: 100%;
   display: flex;
@@ -103,16 +104,16 @@ nav a:hover {
   justify-content: center;
   align-items: center;
   margin-top: 80px;
-}
+} */
 
 .canvas-container {
   position: relative;
   width: 100%;
-}
+} 
 
-canvas {
+/*canvas {
   width: 100%;
   height: 100%;
   position: absolute;
-}
-</style>
+}*/
+</style> 
